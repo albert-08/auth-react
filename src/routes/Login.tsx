@@ -1,10 +1,17 @@
 import { useState } from "react";
 import DefaultLayout from "../layout/DefaultLayout";
+import useAuth from "../hooks/useAuth";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const auth = useAuth();
 
+  if (auth.isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
+  
   return (
     <DefaultLayout>
       <form action="" className="form">
